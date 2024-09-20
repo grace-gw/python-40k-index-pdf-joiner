@@ -71,7 +71,9 @@ def JoinPDFs(destinationPDF: str, PDFs: list) -> None:
     out.close()
 
 
-def GetFilesOfTypeInFolder(folderPath: str, fileType: str, ignoreMasks: list[str] = []) -> list[str]:
+def GetFilesOfTypeInFolder(folderPath: str, fileType: str, ignoreMasks: list[str] = None) -> list[str]:
+    if ignoreMasks is None:
+        ignoreMasks = []
     files_of_type = []
     files = os.listdir(folderPath)
     for file in files:
@@ -88,7 +90,9 @@ def GetFilesOfTypeInFolder(folderPath: str, fileType: str, ignoreMasks: list[str
     return files_of_type
 
 
-def FindSubfoldersWithFilesOfType(rootFolderPath: str, fileType: str, ignoreMasks: list[str] = []) -> list[str]:
+def FindSubfoldersWithFilesOfType(rootFolderPath: str, fileType: str, ignoreMasks: list[str] = None) -> list[str]:
+    if ignoreMasks is None:
+        ignoreMasks = []
     subfolders = []
     for foldername, _, filenames in os.walk(rootFolderPath):
         for filename in filenames:
