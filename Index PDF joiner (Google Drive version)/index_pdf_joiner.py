@@ -37,8 +37,11 @@ def join_index_pdfs():
         files = get_files_of_type_in_folder(folder_path, ".pdf", SKIP_FILES_AND_FOLDERS_WITH)
 
         # skip if existing
-        if os.path.isfile(target_file) and is_file_newer_than_files(target_file, files):
-            continue
+        if os.path.isfile(target_file):
+            if is_file_newer_than_files(target_file, files):
+                continue
+            else:
+                os.remove(target_file)
 
         # join the PDFs
         join_pdfs(target_file, files)
