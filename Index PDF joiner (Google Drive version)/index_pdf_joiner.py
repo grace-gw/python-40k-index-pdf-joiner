@@ -6,7 +6,7 @@ from typing import Union
 
 import fitz
 
-G_SKIP_FILES_AND_FOLDERS_WITH = ["OLD"]
+G_SKIP_FILES_AND_FOLDERS_WITH = ["OLD", "DNU"]
 
 G_FOLDER_IDENTIFIER = "UNQ"
 
@@ -67,7 +67,8 @@ def JoinPDFs(destinationPDF: str, PDFs: list) -> None:
     dict_list = [page_dict]
     out.set_page_labels(dict_list)
 
-    out.save(destinationPDF)
+    out.save(destinationPDF, garbage=4, deflate=True, clean=True)
+    out.close()
 
 
 def GetFilesOfTypeInFolder(folderPath: str, fileType: str, ignoreMasks: list[str] = []) -> list[str]:
